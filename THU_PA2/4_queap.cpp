@@ -57,8 +57,8 @@ private:
 Stack::Stack()
 {
     size = 0;
-    header = new Node(-1);
-    trailer = new Node(-2);
+    header = new Node(-100);
+    trailer = new Node(-200);
     header->prev = NULL;
     header->succ = trailer;
     trailer->prev = header;
@@ -111,21 +111,19 @@ private:
 
 Queap::Queap()
 {
-    enS = new Stack();
-    deS = new Stack();
-    minS1 = new Stack();
-    minS2 = new Stack();
     size = 0;
 }
 
 void Queap::enqueap(int value)
 {
     size ++;
-    if (value < enS.top())
-        minS1.push(enS.top())
+    if (!enS.empty() && value > minS1.top())
+        minS1.push(minS1.top());
     else
         minS1.push(value);
     enS.push(value);
+    // printf("%d %d\n",enS.top(),minS1.top());
+
 
 }
 
@@ -136,21 +134,22 @@ int Queap::dequeap()
         while(!enS.empty()){
             minS1.pop();
             int tmp = enS.pop();
-            deS.push(tmp);
-            if (tmp < deS.top())
-                minS2.push(tmp);
+
+            if (!deS.empty() && tmp > minS2.top())
+                minS2.push(minS2.top());
             else
-                minS2.push(deS.top());
+                minS2.push(tmp);
+            deS.push(tmp);
         }
     }
     size --;
-    minS2.pop()
-    return deS.pop()
+    minS2.pop();
+    return deS.pop();
 }
 
 int Queap::min()
 {
-    return (minS2.top() < minS1.top()) ? minS2.top() : minS1.top();
+    return (minS1.empty() || (!minS2.empty() && minS2.top() < minS1.top()) ) ? minS2.top() : minS1.top();
 }
 
 int main()
@@ -159,5 +158,26 @@ int main()
         freopen("input.txt", "r", stdin);
         // freopen("output.txt", "w", stdout);
     #endif
+    int n,d;
+    Queap Q;
+    scanf("%d\n",&n);
+    char c;
+    while(n--){
+        scanf("%c",&c);
+        // printf("%c\n",c);
+        if (c == 'E')
+        {
+            scanf(" %d\n",&d);
+            Q.enqueap(d);
+        }
+        if (c == 'M'){
+            scanf("\n");
+            printf("%d\n", Q.min());
+        }
+        if (c == 'D'){
+            scanf("\n");
+            printf("%d\n", Q.dequeap());
+        }
+    }
     return 0;
 }
