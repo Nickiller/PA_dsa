@@ -4,9 +4,9 @@ Programming assignments for THU DSA
 
 #### PA 1: due oct.11
 
-- [x] 1_range
-- [x] 2_zuma
-- [x] 3_lighthouse
+- [x] 1_range: radix sort
+- [x] 2_zuma: list + simulation
+- [x] 3_lighthouse: count inversions, divide and conquer
 
 #### PA2: due nov.12
 
