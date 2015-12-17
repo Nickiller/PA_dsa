@@ -17,9 +17,10 @@ public:
     Node* prev;
     Node* succ;
     char* data;
+    int cnt;
 
     Node(){}
-    Node(char* data = NULL, Node* prev = NULL, Node* succ = NULL){
+    Node(char* data = NULL, Node* prev = NULL, Node* succ = NULL,int cnt = 0){
         this->prev = prev;
         this->succ = succ;
         this->data = data;
@@ -137,10 +138,14 @@ int hash(char* s){
 
 int equal(char* s1, char* s2){
     int flag = 1,i = 0;
-    while(i < 40 && s1[i] != '\0' && s2[i] != '\0'){
+    while(i < 40){
         if (s1[i] != s2[i])
         {
             flag = 0;
+            break;
+        }
+        if (s1[i] == '\0')
+        {
             break;
         }
         i++;
@@ -154,7 +159,9 @@ int isInList(char* s, List L){
     while(p != L.trailer){
         if (equal(s,p->data))
         {
-            flag = 1;
+
+            flag = (p->cnt == 0) ? 2 : 1;
+            p->cnt += 1;
             break;
         }
         p = p->succ;
@@ -172,21 +179,21 @@ int main(int argc, char const *argv[])
     int n,m;
 
     scanf("%d\n",&n);
-    printf("%d\n",n);
     m = n;
     List* H = new List[n];
     while(n--){
         // each time use new to gen a new pointer s;
         // if use char s[40], all str read in will link to the same s
-        char* s = new char[40];
+        char* s = new char[45];
         scanf("%s\n",s);
         int hashPos = hash(s) % m;
         // printf("%s %d\n",s,hashPos);
 
-        if (isInList(s,H[hashPos]))
+        int flag = isInList(s,H[hashPos]);
+        if (flag == 2)
         {
-            printf("replica: %s\n", s);
-        } else {
+            printf("%s\n", s);
+        } else if (flag == 0) {
             H[hashPos].enqueue(s);
         }
     }
