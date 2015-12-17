@@ -18,4 +18,10 @@ Programming assignments for THU DSA
 
 - [x] 1_TSP:  Stack + topological sort
 - [x] 2_broadcast: BFS
-- [ ] 3_duplicate
+- [x] 3_duplicate: hash
+
+#### PA4: due Jan.6
+
+- [ ] [ ] 1_toy
+- [ ] [x] 2_schedule: heap
+- [ ] [ ] 3_cycle
