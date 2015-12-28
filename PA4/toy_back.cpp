@@ -102,6 +102,7 @@ void init_StateTree(StateNode* StateTree){
 	StateTree[0].step = 0;
 	insert_index = 0;
 	StateTree[0].convertInt = convertToInt(StateTree);
+	bit.reset();
 	bit.set(StateTree[0].convertInt);
 	if (StateTree[0].convertInt == 1){
 		printf("%d\n",StateTree[0].step);
@@ -131,6 +132,10 @@ void init_StateTree(StateNode* StateTree){
 
 int main()
 {
+    #ifndef _OJ_
+          freopen("input.txt", "r", stdin);
+          // freopen("output.txt", "w", stdout);
+    #endif
 	int N;
 	scanf("%d",&N);
 
