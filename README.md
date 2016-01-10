@@ -22,6 +22,6 @@ Programming assignments for THU DSA
 
 #### PA4: due Jan.6
 
-- [ ] [ ] 1_toy
-- [ ] [x] 2_schedule: heap
-- [ ] [ ] 3_cycle
+- [x] 1_toy: bfs search
+- [x] 2_schedule: heap
+- [x] 3_cycle: kmp
